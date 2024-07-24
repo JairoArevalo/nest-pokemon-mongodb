@@ -9,6 +9,10 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true, // Solo permite los campos definidos en el DTO
       forbidNonWhitelisted: true, // No permite campos adicionales que no esten definidos en el DTO
+      transform: true, // Transforma los datos de entrada en el DTO
+      transformOptions: {
+        enableImplicitConversion: true, // Convierte los tipos de datos implicitos
+      },
     }),
   );
   await app.listen(3000);

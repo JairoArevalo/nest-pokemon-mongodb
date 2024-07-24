@@ -5,6 +5,7 @@ import { Pokemon } from './entities/pokemon.entity';
 import { isValidObjectId, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { isMongoId } from 'class-validator';
+import { PaginationPokemonDto } from './dto/pagination-pokemon.dto';
 
 @Injectable()
 export class PokemonService {
@@ -32,8 +33,13 @@ export class PokemonService {
 
   }
 
-  findAll() {
-    return `This action returns all pokemon`;
+  async findAll(queryParameters:PaginationPokemonDto): Promise<Pokemon[] | string> {
+    const { limit = 150, offset = 0 } = queryParameters;
+    let pokemons = await this.pokemonModel.find().limit(limit).skip(offset).sort({no:1});
+    if (pokemons) {
+      return pokemons;
+    }
+    throw new BadRequestException('No hay pokemons, ejecute seed');
   }
 
   async findOne(terminoBusquedaPokemon: string) {
@@ -103,5 +109,10 @@ export class PokemonService {
       return pokemon
     }
     throw new BadRequestException('El id del pokemon no existe');
+  }
+
+  async insertPokemonLote(pokemons: CreatePokemonDto[]) {
+    pokemons = await this.pokemonModel.insertMany(pokemons);
+    return pokemons;
   }
 }
