@@ -78,10 +78,23 @@ npm i -g @nestjs/cli
 docker-compose up -d
 ```
 
-5. Construir la semill
+5. Clonar el archivo __.env.template__ y renombrar la copia a __.env__
+
+6. llenar las variables de entorno definidas en el ``` .env  ``` 
+
+7. Ejecutar la aplicacion en dev 
+
+```
+nest start --watch
+```
+
+
+8. Construir la semill
 ```
 http://localhost:3000/api/v2/seed
 ```
+
+
 
 
 
@@ -90,5 +103,15 @@ http://localhost:3000/api/v2/seed
 *Nest
 
 
+# BUILD DE PROD O LOCAL 
+
+1. Crear el archivo  ``` .env.prod ```
+2. llenar las variables de entorno de prod 
+3. Crear la nueva image
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+
+```
 
 

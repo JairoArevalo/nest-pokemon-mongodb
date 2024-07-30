@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: mongo:5
+    container_name: poke-api
     restart: always
     ports:
       - 27017:27017
