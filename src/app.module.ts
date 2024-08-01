@@ -6,7 +6,7 @@ import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { join } from "path";
 import { EnvConfiguration } from './config/env.config';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { JoiValidationSchema } from './config/joi.validation';
 
 @Module({
